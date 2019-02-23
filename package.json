@@ -1,0 +1,48 @@
+{
+	"name": "swtc-factory",
+	"version": "1.1.0",
+	"description": "swtc base lib factory",
+	"main": "distrib/npm/index.js",
+	"directories": {
+		"test": "test"
+	},
+	"scripts": {
+		"compile": "babel -d distrib/npm src",
+		"build": "babel -d distrib/npm src",
+		"prepublish": "babel -d distrib/npm src",
+		"test": "mocha \"test/test*.js\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/swtcca/swtc-factory.git"
+	},
+	"keywords": [
+		"factory",
+		"swtc",
+		"jcc"
+	],
+	"author": "Lospring Liu <lospringliu@gmail.com>",
+	"license": "BSD-2-Clause",
+	"bugs": {
+		"url": "https://github.com/swtcca/swtc-factory/issues"
+	},
+	"homepage": "https://github.com/swtcca/swtc-factory#readme",
+	"dependencies": {
+		"swtc-keypairs": "^0.10.9"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.2.3",
+		"@babel/core": "^7.3.3",
+		"@babel/plugin-transform-classes": "^7.3.3",
+		"bwt-keypairs": "^0.10.9",
+		"chai": "^4.2.0",
+		"esm": "^3.2.6",
+		"mocha": "^5.2.0"
+	},
+	"babel": {
+		"presets": [],
+		"plugins": [
+			"@babel/plugin-transform-classes"
+		]
+	}
+}
