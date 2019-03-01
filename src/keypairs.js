@@ -1,12 +1,6 @@
 'use strict';
 // this is only for jcc compatibility use
 
-/**
- * account stub for subscribe accounts transaction event
- * can be used for many accounts
- * @param {string} token
- * @constructor
- */
 class KeyPairs {
 	constructor(token = 'swt') {
 		if (token.toLowerCase() === 'swt') {
@@ -18,7 +12,6 @@ class KeyPairs {
 			throw new Error(`config of ${token.toLowerCase()} is empty`);
 		}
 	}
-
 
 	/**
 	 * generate random bytes and encode it to secret
@@ -61,9 +54,9 @@ class KeyPairs {
 	 * @returns byte array
 	 */
 	convertAddressToBytes(address) {
-		try {
+		if (this.checkAddress(address)) {
 			return this._KEYPAIRS.addressCodec.decode(address)
-		} catch (error) {
+		} else {
 			throw new Error('convert address to bytes in error')
 		}
 	}
@@ -76,17 +69,6 @@ class KeyPairs {
 		return this._KEYPAIRS.addressCodec.encode(bytes)
 	}
 
-	// /**
-	//  * devive keypair from privatekey
-	//  */
-	// deriveKeyPairWithKey(key) {
-	// 	var privateKey = key;
-	// 	var publicKey = bytesToHex(ec.keyFromPrivate(key).getPublic().encodeCompressed());
-	// 	return {
-	// 		privateKey: privateKey,
-	// 		publicKey: publicKey
-	// 	};
-	// };
 }
 
 module.exports = KeyPairs;
