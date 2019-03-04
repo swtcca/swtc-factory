@@ -126,7 +126,7 @@ class Wallet {
 		if (!this._keypairs) return null;
 		let privateKey = this._keypairs.privateKey;
 		// Export DER encoded signature in Array
-		return this._kp._KEYPAIRS.ec.sign(message, privateKey);
+		return this._kp._KEYPAIRS.ec.signTx(message, privateKey);
 	}
 
 	/**
@@ -138,7 +138,7 @@ class Wallet {
 	verifyTx(message, signature) {
 		if (!this._keypairs) return null;
 		let publicKey = this.getPublicKey();
-		return this._kp._KEYPAIRS.ec.verify(message, signature, publicKey);
+		return this._kp._KEYPAIRS.ec.verifyTx(message, signature, publicKey);
 	}
 }
 
