@@ -1,15 +1,15 @@
-'use strict';
+"use strict"
 // this is only for jcc compatibility use
 
 class KeyPairs {
-	constructor(token = 'swt') {
-		if (token.toLowerCase() === 'swt') {
-			this._KEYPAIRS = require('swtc-keypairs')
-		} else if (token.toLowerCase() === 'bwt') {
-			this._KEYPAIRS = require('bwt-keypairs')
+	constructor(token = "swt") {
+		if (token.toLowerCase() === "swt") {
+			this._KEYPAIRS = require("swtc-keypairs")
+		} else if (token.toLowerCase() === "bwt") {
+			this._KEYPAIRS = require("bwt-keypairs")
 		} else {
 			//throw new Error(`no implementation for ${token} alliance chain yet`);
-			throw new Error(`config of ${token.toLowerCase()} is empty`);
+			throw new Error(`config of ${token.toLowerCase()} is empty`)
 		}
 	}
 
@@ -57,7 +57,7 @@ class KeyPairs {
 		if (this.checkAddress(address)) {
 			return this._KEYPAIRS.addressCodec.decodeAddress(address)
 		} else {
-			throw new Error('convert address to bytes in error')
+			throw new Error("convert address to bytes in error")
 		}
 	}
 
@@ -65,10 +65,10 @@ class KeyPairs {
 	 * convert the byte array to wallet address
 	 */
 	convertBytesToAddress(bytes) {
-		if ((typeof bytes) !== 'object')  throw new Error('convert bytes to address in error')
+		if (typeof bytes !== "object")
+			throw new Error("convert bytes to address in error")
 		return this._KEYPAIRS.addressCodec.encodeAddress(bytes)
 	}
-
 }
 
-module.exports = KeyPairs;
+module.exports = KeyPairs
