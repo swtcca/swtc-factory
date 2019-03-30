@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "outDir": "src",
+    "rootDir": "tssrc",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "preserveConstEnums": false,
+    "suppressImplicitAnyIndexErrors": false,
+    "declaration": true,
+    "sourceMap": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "tssrc/**/*.ts"
+  ]
+}
