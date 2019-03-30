@@ -32,8 +32,7 @@
   "homepage": "https://github.com/swtcca/swtc-factory#readme",
   "dependencies": {
     "bwt-keypairs": "^0.11.9",
-    "swtc-keypairs": "^0.11.8",
-    "typescript": "^3.4.1"
+    "swtc-keypairs": "^0.11.8"
   },
   "devDependencies": {
     "@types/node": "^11.12.2",
@@ -44,7 +43,8 @@
     "mocha": "^5.2.0",
     "nyc": "^13.3.0",
     "prettier": "^1.16.4",
-    "pretty-quick": "^1.10.0"
+    "pretty-quick": "^1.10.0",
+    "typescript": "^3.4.1"
   },
   "babel": {
     "presets": [],
