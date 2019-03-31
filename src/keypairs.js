@@ -1,13 +1,12 @@
 "use strict"
 // this is only for jcc compatibility use
+const SwtcKeypairs = require("swtc-keypairs")
 
 class KeyPairs {
   constructor(token = "swt") {
-    if (token.toLowerCase() === "swt") {
-      this._KEYPAIRS = require("swtc-keypairs")
-    } else if (token.toLowerCase() === "bwt") {
-      this._KEYPAIRS = require("bwt-keypairs")
-    } else {
+    try {
+      this._KEYPAIRS = SwtcKeypairs(token)
+    } catch (error) {
       //throw new Error(`no implementation for ${token} alliance chain yet`);
       throw new Error(`config of ${token.toLowerCase()} is empty`)
     }

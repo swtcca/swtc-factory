@@ -1,6 +1,6 @@
 {
   "name": "swtc-factory",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "swtc base lib factory",
   "main": "src/index.js",
   "directories": {
@@ -21,7 +21,6 @@
   "keywords": [
     "factory",
     "swtc",
-    "bwt",
     "jcc"
   ],
   "author": "Lospring Liu <lospringliu@gmail.com>",
@@ -31,8 +30,7 @@
   },
   "homepage": "https://github.com/swtcca/swtc-factory#readme",
   "dependencies": {
-    "bwt-keypairs": "^0.11.9",
-    "swtc-keypairs": "^0.11.8"
+    "swtc-keypairs": "^0.11.10"
   },
   "devDependencies": {
     "@types/node": "^11.12.2",
