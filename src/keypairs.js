@@ -54,7 +54,7 @@ class KeyPairs {
    */
   convertAddressToBytes(address) {
     if (this.checkAddress(address)) {
-      return this._KEYPAIRS.addressCodec.decodeAddress(address)
+      return this._KEYPAIRS.convertAddressToBytes(address)
     } else {
       throw new Error("convert address to bytes in error")
     }
@@ -66,7 +66,7 @@ class KeyPairs {
   convertBytesToAddress(bytes) {
     if (typeof bytes !== "object")
       throw new Error("convert bytes to address in error")
-    return this._KEYPAIRS.addressCodec.encodeAddress(bytes)
+    return this._KEYPAIRS.convertBytesToAddress(bytes)
   }
 }
 
