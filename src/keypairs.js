@@ -23,14 +23,14 @@ class KeyPairs {
    * get corresponding Keypair for its _token
    */
   keyPairs() {
-    return KEYPAIRS[this._token]
+    return KeyPairs.KEYPAIRS[this._token]
   }
   /**
    * generate random bytes and encode it to secret
    * @returns {string}
    */
-  generateSeed() {
-    return this.keyPairs().generateSeed()
+  generateSeed(options) {
+    return this.keyPairs().generateSeed(options)
   }
 
   /**

@@ -14,6 +14,9 @@ describe("test keypairs", function() {
       expect(chains).to.include("xrp")
       expect(chains).to.include("bitcoin")
       expect(chains).to.include("btc")
+      expect(chains).to.include("call")
+      expect(chains).to.include("stream")
+      expect(chains).to.include("stm")
     })
   })
 
