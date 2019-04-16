@@ -100,7 +100,7 @@ class Wallet {
     if (!this._keypairs) return null
     let privateKey = this._keypairs.privateKey
     // Export DER encoded signature in Array
-    return this._kp._KEYPAIRS.signHash(message, privateKey)
+    return this._kp.keyPairs().signHash(message, privateKey)
   }
 
   /**
@@ -112,7 +112,7 @@ class Wallet {
   verify(message, signature) {
     if (!this._keypairs) return null
     var publicKey = this.getPublicKey()
-    return this._kp._KEYPAIRS.verifyHash(message, signature, publicKey)
+    return this._kp.keyPairs().verifyHash(message, signature, publicKey)
   }
 
   /**
@@ -126,7 +126,7 @@ class Wallet {
     if (!this._keypairs) return null
     let privateKey = this._keypairs.privateKey
     // Export DER encoded signature in Array
-    return this._kp._KEYPAIRS.signTx(message, privateKey)
+    return this._kp.keyPairs().signTx(message, privateKey)
   }
 
   /**
@@ -138,7 +138,7 @@ class Wallet {
   verifyTx(message, signature) {
     if (!this._keypairs) return null
     let publicKey = this.getPublicKey()
-    return this._kp._KEYPAIRS.verifyTx(message, signature, publicKey)
+    return this._kp.keyPairs().verifyTx(message, signature, publicKey)
   }
 }
 

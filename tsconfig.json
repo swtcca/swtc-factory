@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
+    "pretty": true,
+    "lib": ["es2015"],
     "target": "es6",
     "outDir": "src",
     "rootDir": "tssrc",
@@ -9,14 +12,16 @@
     "noImplicitAny": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
     "removeComments": false,
     "preserveConstEnums": false,
     "suppressImplicitAnyIndexErrors": false,
     "declaration": true,
     "sourceMap": true,
+    "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "skipLibCheck": true
   },
-  "include": [
-    "tssrc/**/*.ts"
-  ]
+  "include": ["tssrc"]
 }

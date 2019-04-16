@@ -1,23 +1,36 @@
 "use strict"
 // this is only for jcc compatibility use
+const SWTC_CHAINS = require("swtc-chains")
 const SwtcKeypairs = require("swtc-keypairs")
+
+let KEYPAIRS = {}
+SWTC_CHAINS.forEach(chain => {
+  KEYPAIRS[chain.code.toLowerCase()] = SwtcKeypairs(chain.code.toLowerCase())
+  KEYPAIRS[chain.currency.toLowerCase()] = SwtcKeypairs(
+    chain.currency.toLowerCase()
+  )
+})
 
 class KeyPairs {
   constructor(token = "swt") {
-    try {
-      this._KEYPAIRS = SwtcKeypairs(token)
-    } catch (error) {
-      //throw new Error(`no implementation for ${token} alliance chain yet`);
+    this._token = token.toLowerCase()
+    if (KEYPAIRS[this._token] === undefined) {
       throw new Error(`config of ${token.toLowerCase()} is empty`)
     }
   }
 
   /**
+   * get corresponding Keypair for its _token
+   */
+  keyPairs() {
+    return KEYPAIRS[this._token]
+  }
+  /**
    * generate random bytes and encode it to secret
    * @returns {string}
    */
   generateSeed() {
-    return this._KEYPAIRS.generateSeed()
+    return this.keyPairs().generateSeed()
   }
 
   /**
@@ -26,7 +39,7 @@ class KeyPairs {
    * @returns {{privateKey: string, publicKey: *}}
    */
   deriveKeyPair(secret) {
-    return this._KEYPAIRS.deriveKeyPair(secret)
+    return this.keyPairs().deriveKeyPair(secret)
   }
 
   /**
@@ -35,7 +48,7 @@ class KeyPairs {
    * @returns {string}
    */
   deriveAddress(publicKey) {
-    return this._KEYPAIRS.deriveAddress(publicKey)
+    return this.keyPairs().deriveAddress(publicKey)
   }
 
   /**
@@ -44,7 +57,7 @@ class KeyPairs {
    * @returns {boolean}
    */
   checkAddress(address) {
-    return this._KEYPAIRS.checkAddress(address)
+    return this.keyPairs().checkAddress(address)
   }
 
   /**
@@ -54,7 +67,7 @@ class KeyPairs {
    */
   convertAddressToBytes(address) {
     if (this.checkAddress(address)) {
-      return this._KEYPAIRS.convertAddressToBytes(address)
+      return this.keyPairs().convertAddressToBytes(address)
     } else {
       throw new Error("convert address to bytes in error")
     }
@@ -66,8 +79,10 @@ class KeyPairs {
   convertBytesToAddress(bytes) {
     if (typeof bytes !== "object")
       throw new Error("convert bytes to address in error")
-    return this._KEYPAIRS.convertBytesToAddress(bytes)
+    return this.keyPairs().convertBytesToAddress(bytes)
   }
 }
+
+KeyPairs.KEYPAIRS = KEYPAIRS
 
 module.exports = KeyPairs
