@@ -14,81 +14,61 @@ swtc-factory == jcc-jingtum-base-lib
 
 ```javascript
 > .load test.js
-const Factory = require('swtc-factory').Wallet
-const KeyPair = require('swtc-factory').KeyPair
+const Wallet = require('swtc-factory').Wallet
 const SwtcChains = require('swtc-chains')
-var seed, secret, keypairs, wallet
+var wallet
 SwtcChains.forEach( chain => {
         let token = chain.currency
-	let kp = new KeyPair(token)
 	console.log(`\t... with secp256k1 ...`)
-	seed = kp.generateSeed()
-	console.log(`${token} seed:\t${seed}`)
-	wallet = new Factory(seed, token)
-	console.log(`${token} address:\t${wallet.address()}`)
-	console.log(`${token} secret:\t${wallet.secret()}`)
+	wallet = Wallet.generate(token)
+	console.log(`${token} address:\t${wallet.address}`)
+	console.log(`${token} secret:\t${wallet.secret}`)
 	console.log(`\t... with ed25519 ...`)
-	seed = kp.generateSeed({algorithm: 'ed25519'}, 'param2')
-	console.log(`${token} seed:\t${seed}`)
-	wallet = new Factory(seed, token)
-	console.log(`${token} address:\t${wallet.address()}`)
-	console.log(`${token} secret:\t${wallet.secret()}`)
+	wallet = Wallet.generate(token, {algorithm: 'ed25519'})
+	console.log(`${token} address:\t${wallet.address}`)
+	console.log(`${token} secret:\t${wallet.secret}`)
 })
 
 	... with secp256k1 ...
-BTC seed:	33N3pJmWjxfRWrFY1Q3X19wAY6yCQ
-BTC address:	1P5MNsEsvn4MpP9jeHAgAFZppYodE7Enjt
-BTC secret:	33N3pJmWjxfRWrFY1Q3X19wAY6yCQ
+BTC address:	16kXez5CogMiYjhYZt4ypiBKMdZMQLe2Kc
+BTC secret:	35MDfeFj9ZF6WCYXpPcAbzw3Ymt65
 	... with ed25519 ...
-BTC seed:	3FdStd99Af5EDmjHNTEhZginWM1KTcP
-BTC address:	1FaRNQDdK1ofouU3Ra7LLmCcGfCGtrB6Jk
-BTC secret:	3FdStd99Af5EDmjHNTEhZginWM1KTcP
+BTC address:	18r5HQz1MEhK3Figc66TnWfPYoKpRtkfmw
+BTC secret:	3FdVDT7tbqK5uRny3jCSaN7pvm5ai5m
 	... with secp256k1 ...
-XRP seed:	sspFvWvec7EdWfq9BEbbZ7aJoCEDm
-XRP address:	rw2Q8MFdHjrVQoMWzepbznZhn5JXa12e7d
-XRP secret:	sspFvWvec7EdWfq9BEbbZ7aJoCEDm
+XRP address:	rsmSNgwLfx8s9GwKEarcWxsFuWxXUVzCJy
+XRP secret:	snbratgKcMgQhfKQ8P4m7bsrXhmkQ
 	... with ed25519 ...
-XRP seed:	sEdVLF4qRSL5gY91pe9ZkcfD3EZNEMj
-XRP address:	rQsinuNQeqE94FdmFmfoNoguf3xm4NCrFp
-XRP secret:	sEdVLF4qRSL5gY91pe9ZkcfD3EZNEMj
+XRP address:	rwrKqUvoycV9gK4DuHbESF39NnVXjMvor7
+XRP secret:	sEd7kFD1erA33sVPsKNbqAaGp6NoAVE
 	... with secp256k1 ...
-XLM seed:	phDM3ebCa68FrQ8h8kHupRcNsAu6U
-XLM address:	gh4bQruv5cgDpLZEtQhWZwnSkzF2Fmp15k
-XLM secret:	phDM3ebCa68FrQ8h8kHupRcNsAu6U
+XLM address:	gwErV7U7pKZRfpzHNZzVFQgHSdaYwpcENv
+XLM secret:	paaoyoG2pCuVgtxduppVShVgN98VX
 	... with ed25519 ...
-XLM seed:	pEdTp6qxLUsckQK5EaxZZS5rDCMiJzy
-XLM address:	gnPbJ1QivftmkSKdyLwTHA8G7gAZrGtTXS
-XLM secret:	pEdTp6qxLUsckQK5EaxZZS5rDCMiJzy
+XLM address:	gKpWGStT7EJ46Ze1TvS6A3EWhtvaATQT1K
+XLM secret:	pEdSSeprhmqrtCcAvSRWrdAM6kcjw47
 	... with secp256k1 ...
-CALL seed:	shL8xaejGwsCagboL4VbLUvwWuBdV
-CALL address:	cPm5WrxV1F1qNP5pMxwodvMqzgtW6mpmWo
-CALL secret:	shL8xaejGwsCagboL4VbLUvwWuBdV
+CALL address:	cHG4tRGC3ihGbqWY5fnoh1Fwhy2bJER5HP
+CALL secret:	sh9Rta1dmEayh8o2ZftBYzb4kmmtZ
 	... with ed25519 ...
-CALL seed:	sEd7bcufGVwFXXAxjEPNcaw7ebaQn3y
-CALL address:	cDdZHCfoRu4T3RgHQHqnXHodDaDK4sTuvF
-CALL secret:	sEd7bcufGVwFXXAxjEPNcaw7ebaQn3y
+CALL address:	cwmfZvrBsTuUV9tUhggVEVvFk63wm8kbo7
+CALL secret:	sEdTvPQE5kFVta8f5AxBLZKZ8Z3XCmW
 	... with secp256k1 ...
-STM seed:	shP27HjhvsfPqEae7Y86EJMAvH4oD
-STM address:	vnV2SxUdLtCp9EmHYTF1YEubu7Fq58bjj5
-STM secret:	shP27HjhvsfPqEae7Y86EJMAvH4oD
+STM address:	v4U6Zw3EuDTuL6yyxmAgKpijAcXZwBKEAc
+STM secret:	shuMxfHs7xKAkX4LYAkggnrzSduqb
 	... with ed25519 ...
-STM seed:	sEdTqfaH8CtX6j1xXTtaFT1X2P3FjFr
-STM address:	vLhUR8Qon94eQHhoRMt3Xp4YuauoXM9mt1
-STM secret:	sEdTqfaH8CtX6j1xXTtaFT1X2P3FjFr
+STM address:	vwHU7sV56ZffeVBc2ijXqztKGoiKX6TdFh
+STM secret:	sEdVGc1nGor7HmmqfjN9bb1psyCvnjr
 	... with secp256k1 ...
-SWT seed:	sssRUkjDFN256xSFMo9JnNRSARuKJ
-SWT address:	j95kK4zRi4G2Gb44HTXzKRoLDk7AVHhQm4
-SWT secret:	sssRUkjDFN256xSFMo9JnNRSARuKJ
+SWT address:	jfnxW6tgzuUEMSU8n1zi5PpP3rhX6XAjVo
+SWT secret:	shaRNXjy6aDGbn6a8MgCpMcJCE2om
 	... with ed25519 ...
-SWT seed:	sEdTHzL93dXknpafWS2gDpukxNAhQUE
-SWT address:	jhbqxuyeZSrCftHuTLGY5zdgwJkbPWdaCh
-SWT secret:	sEdTHzL93dXknpafWS2gDpukxNAhQUE
+SWT address:	jpMoHNKUSk1bxDTozCXvrbubr4CExAGkYP
+SWT secret:	sEdSCykKdVPiREXCkek5ARSsE4PxmJ3
 	... with secp256k1 ...
-BWT seed:	shpy12BrDuqbUG4c2cy9hmP4NJmnd
-BWT address:	b9KFYEpLr8KGp3AMh6n1qW7iC88MbZdnTe
-BWT secret:	shpy12BrDuqbUG4c2cy9hmP4NJmnd
+BWT address:	bHU4ap7ANtWihUoJ1qhABn1imtK4Jigain
+BWT secret:	saNaU2fEHtRY4Vx5oQiWS15n2Hizz
 	... with ed25519 ...
-BWT seed:	sEdV66spM8n5h2MwRQ5PzSepLu2Q2gG
-BWT address:	bEn4ZGNpUGRpThFDY78MXmLHfwvtadu7BK
-BWT secret:	sEdV66spM8n5h2MwRQ5PzSepLu2Q2gG
+BWT address:	bShESv4x2Bj7XXLxav9FWD85AP4CLf44X
+BWT secret:	sEdVMW7dRrD1qU7uYhbNRAkgKUx6MaU
 ```

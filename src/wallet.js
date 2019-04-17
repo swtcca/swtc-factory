@@ -14,9 +14,9 @@ class Wallet {
     }
   }
 
-  static generate(token = "swt") {
+  static generate(token = "swt", options = {}) {
     let kp = new KeyPairs(token)
-    let secret = kp.generateSeed()
+    let secret = kp.generateSeed(options)
     let keypair = kp.deriveKeyPair(secret)
     let address = kp.deriveAddress(keypair.publicKey)
     return {
