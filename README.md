@@ -9,6 +9,7 @@ swtc-factory == jcc-jingtum-base-lib
    > - call, stream
    > - jingtum, bizain
 2. supports `ed25519` algorithm for seed
+3. typescript friendly since v1.2
 
 ## usages
 
