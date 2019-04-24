@@ -1,6 +1,6 @@
 {
   "name": "swtc-factory",
-  "version": "1.1.13",
+  "version": "1.2.0",
   "description": "swtc base lib factory",
   "main": "src/index.js",
   "directories": {
@@ -9,9 +9,10 @@
   "scripts": {
     "prettier": "prettier",
     "pretty-quick": "pretty-quick",
-    "prettier:check": "prettier -c --no-semi src/*.js",
-    "prettier:tabs": "prettier --no-semi --use-tabs --write package.json src/*.js",
-    "eslint": "eslint src/*.js",
+    "prettier:check": "prettier -c tssrc/*.ts",
+    "prettier:tabs": "prettier --use-tabs --write package.json tssrc/*.ts",
+    "tsc": "tsc",
+    "tslint": "tslint tssrc/*.ts",
     "test": "mocha \"test/test*.js\""
   },
   "repository": {
@@ -44,7 +45,7 @@
     "esm": "^3.2.6",
     "husky": "1.3.1",
     "mocha": "^5.2.0",
-    "nyc": "^13.3.0",
+    "nyc": "^14.0.0",
     "prettier": "^1.16.4",
     "pretty-quick": "^1.10.0",
     "tslint": "^5.15.0",

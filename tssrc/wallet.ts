@@ -1,35 +1,22 @@
-"use strict"
-
-const KeyPairs = require("./keypairs")
+import { KeyPairs } from "./keypairs"
 
 class Wallet {
-  constructor(secret, token = "swt") {
-    try {
-      this._kp = new KeyPairs(token)
-      this._keypairs = this._kp.deriveKeyPair(secret)
-      this._secret = secret
-    } catch (err) {
-      this._keypairs = null
-      this._secret = null
-    }
-  }
-
-  static generate(token = "swt", options = {}) {
-    let kp = new KeyPairs(token)
-    let secret = kp.generateSeed(options)
-    let keypair = kp.deriveKeyPair(secret)
-    let address = kp.deriveAddress(keypair.publicKey)
+  public static generate(token = "swt", options = {}) {
+    const kp = new KeyPairs(token)
+    const secret = kp.generateSeed(options)
+    const keypair = kp.deriveKeyPair(secret)
+    const address = kp.deriveAddress(keypair.publicKey)
     return {
       secret,
       address
     }
   }
 
-  static fromSecret(secret, token = "swt") {
+  public static fromSecret(secret, token = "swt") {
     try {
-      let kp = new KeyPairs(token)
-      let keypair = kp.deriveKeyPair(secret)
-      let address = kp.deriveAddress(keypair.publicKey)
+      const kp = new KeyPairs(token)
+      const keypair = kp.deriveKeyPair(secret)
+      const address = kp.deriveAddress(keypair.publicKey)
       return {
         secret,
         address
@@ -39,14 +26,14 @@ class Wallet {
     }
   }
 
-  static isValidAddress(address, token = "swt") {
-    let kp = new KeyPairs(token)
+  public static isValidAddress(address, token = "swt") {
+    const kp = new KeyPairs(token)
     return kp.checkAddress(address)
   }
 
-  static isValidSecret(secret, token = "swt") {
+  public static isValidSecret(secret, token = "swt") {
     try {
-      let kp = new KeyPairs(token)
+      const kp = new KeyPairs(token)
       kp.deriveKeyPair(secret)
       return true
     } catch (err) {
@@ -54,13 +41,28 @@ class Wallet {
     }
   }
 
+  protected _kp
+  protected _keypairs
+  protected _secret
+  constructor(secret, token = "swt") {
+    try {
+      this._kp = new KeyPairs(token)
+      this._keypairs = this._kp.deriveKeyPair(secret)
+      this._secret = secret
+    } catch (err) {
+      this._kp = null
+      this._keypairs = null
+      this._secret = null
+    }
+  }
+
   /**
    * get wallet address
    * @returns {*}
    */
-  address() {
+  public address() {
     if (!this._keypairs) return null
-    let address = this._kp.deriveAddress(this._keypairs.publicKey)
+    const address = this._kp.deriveAddress(this._keypairs.publicKey)
     return address
   }
 
@@ -68,12 +70,12 @@ class Wallet {
    * get wallet secret
    * @returns {*}
    */
-  secret() {
+  public secret() {
     if (!this._keypairs) return null
     return this._secret
   }
 
-  toJson() {
+  public toJson() {
     if (!this._keypairs) return null
     return {
       secret: this.secret(),
@@ -85,7 +87,7 @@ class Wallet {
    * Get the public key from key pair
    * used for local signing operation.
    */
-  getPublicKey() {
+  public getPublicKey() {
     if (!this._keypairs) return null
     return this._keypairs.publicKey
   }
@@ -95,10 +97,10 @@ class Wallet {
    * @param message
    * @returns {*}
    */
-  sign(message) {
+  public sign(message) {
     if (!message) return null
     if (!this._keypairs) return null
-    let privateKey = this._keypairs.privateKey
+    const privateKey = this._keypairs.privateKey
     // Export DER encoded signature in Array
     return this._kp.keyPairs().signHash(message, privateKey)
   }
@@ -109,9 +111,9 @@ class Wallet {
    * @param signature
    * @returns {*}
    */
-  verify(message, signature) {
+  public verify(message, signature) {
     if (!this._keypairs) return null
-    var publicKey = this.getPublicKey()
+    const publicKey = this.getPublicKey()
     return this._kp.keyPairs().verifyHash(message, signature, publicKey)
   }
 
@@ -121,10 +123,10 @@ class Wallet {
    * @param message
    * @returns {*}
    */
-  signTx(message) {
+  public signTx(message) {
     if (!message) return null
     if (!this._keypairs) return null
-    let privateKey = this._keypairs.privateKey
+    const privateKey = this._keypairs.privateKey
     // Export DER encoded signature in Array
     return this._kp.keyPairs().signTx(message, privateKey)
   }
@@ -135,11 +137,11 @@ class Wallet {
    * @param signature
    * @returns {*}
    */
-  verifyTx(message, signature) {
+  public verifyTx(message, signature) {
     if (!this._keypairs) return null
-    let publicKey = this.getPublicKey()
+    const publicKey = this.getPublicKey()
     return this._kp.keyPairs().verifyTx(message, signature, publicKey)
   }
 }
 
-module.exports = Wallet
+export { Wallet }

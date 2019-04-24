@@ -2,7 +2,7 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "pretty": true,
-    "lib": ["es2015"],
+    "lib": ["es2015", "dom"],
     "target": "es6",
     "outDir": "src",
     "rootDir": "tssrc",
@@ -18,7 +18,7 @@
     "suppressImplicitAnyIndexErrors": false,
     "declaration": true,
     "sourceMap": true,
-    "strict": true,
+    "strict": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true

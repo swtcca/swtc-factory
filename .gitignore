@@ -70,3 +70,4 @@ typings/
 **/package-lock.json
 distrib
 .vscode
+src

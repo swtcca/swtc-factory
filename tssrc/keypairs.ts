@@ -1,10 +1,9 @@
-"use strict"
 // this is only for jcc compatibility use
-const SWTC_CHAINS = require("swtc-chains")
-const SwtcKeypairs = require("swtc-keypairs")
+import SWTC_CHAINS from "swtc-chains"
+import SwtcKeypairs from "swtc-keypairs"
 
-let KEYPAIRS = {}
-SWTC_CHAINS.forEach(chain => {
+const KEYPAIRS = {}
+SWTC_CHAINS.forEach((chain) => {
   KEYPAIRS[chain.code.toLowerCase()] = SwtcKeypairs(chain.code.toLowerCase())
   KEYPAIRS[chain.currency.toLowerCase()] = SwtcKeypairs(
     chain.currency.toLowerCase()
@@ -12,6 +11,8 @@ SWTC_CHAINS.forEach(chain => {
 })
 
 class KeyPairs {
+  public static KEYPAIRS = KEYPAIRS
+  public readonly _token
   constructor(token = "swt") {
     this._token = token.toLowerCase()
     if (KEYPAIRS[this._token] === undefined) {
@@ -22,14 +23,14 @@ class KeyPairs {
   /**
    * get corresponding Keypair for its _token
    */
-  keyPairs() {
+  public keyPairs() {
     return KeyPairs.KEYPAIRS[this._token]
   }
   /**
    * generate random bytes and encode it to secret
    * @returns {string}
    */
-  generateSeed(options) {
+  public generateSeed(options) {
     return this.keyPairs().generateSeed(options)
   }
 
@@ -38,7 +39,7 @@ class KeyPairs {
    * @param {string} secret
    * @returns {{privateKey: string, publicKey: *}}
    */
-  deriveKeyPair(secret) {
+  public deriveKeyPair(secret) {
     return this.keyPairs().deriveKeyPair(secret)
   }
 
@@ -47,7 +48,7 @@ class KeyPairs {
    * @param {string} publicKey
    * @returns {string}
    */
-  deriveAddress(publicKey) {
+  public deriveAddress(publicKey) {
     return this.keyPairs().deriveAddress(publicKey)
   }
 
@@ -56,7 +57,7 @@ class KeyPairs {
    * @param address
    * @returns {boolean}
    */
-  checkAddress(address) {
+  public checkAddress(address) {
     return this.keyPairs().checkAddress(address)
   }
 
@@ -65,7 +66,7 @@ class KeyPairs {
    * @param address
    * @returns byte array
    */
-  convertAddressToBytes(address) {
+  public convertAddressToBytes(address) {
     if (this.checkAddress(address)) {
       return this.keyPairs().convertAddressToBytes(address)
     } else {
@@ -76,13 +77,12 @@ class KeyPairs {
   /*
    * convert the byte array to wallet address
    */
-  convertBytesToAddress(bytes) {
-    if (typeof bytes !== "object")
+  public convertBytesToAddress(bytes) {
+    if (typeof bytes !== "object") {
       throw new Error("convert bytes to address in error")
+    }
     return this.keyPairs().convertBytesToAddress(bytes)
   }
 }
 
-KeyPairs.KEYPAIRS = KEYPAIRS
-
-module.exports = KeyPairs
+export { KeyPairs }

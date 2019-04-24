@@ -1,4 +1,4 @@
-const Keypairs = require("../src/keypairs")
+const Keypairs = require("../").KeyPairs
 const expect = require("chai").expect
 const { chains, data } = require("./config")
 
