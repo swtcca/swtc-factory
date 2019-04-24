@@ -1,5 +1,5 @@
 const Wallet = require("../").Wallet
-const KeyPair = require("../").KeyPairs
+const KeyPair = require("../").KeyPair
 const expect = require("chai").expect
 const { chains, data } = require("./config")
 describe("Wallet", function() {
