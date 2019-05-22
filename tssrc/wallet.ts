@@ -2,7 +2,7 @@ import SwtcChains from "swtc-chains"
 import { KeyPairs } from "./keypairs"
 const getChain = (chain_name = "jingtum") =>
   SwtcChains.filter(
-    chain =>
+    (chain) =>
       chain.code.toLowerCase() === chain_name.toLowerCase() ||
       chain.currency.toUpperCase() === chain_name.toUpperCase()
   )[0]
@@ -48,31 +48,31 @@ class Wallet {
     }
   }
 
-  public static getCurrency(token = 'swt') {
+  public static getCurrency(token = "swt") {
     const chain = getChain(token)
     return chain ? chain.currency : token.toUpperCase()
   }
-  public static getCurrencies(token = 'swt') {
+  public static getCurrencies(token = "swt") {
     const chain = getChain(token)
     return chain && chain.CURRENCIES ? chain.CURRENCIES : {}
   }
-  public static getChain(token = 'swt') {
+  public static getChain(token = "swt") {
     const chain = getChain(token)
     return chain ? chain.code : token.toLowerCase()
   }
-  public static getFee(token = 'swt') {
+  public static getFee(token = "swt") {
     const chain = getChain(token)
     return chain && chain.fee ? chain.fee : 10000
   }
-  public static getAccountZero(token = 'swt') {
+  public static getAccountZero(token = "swt") {
     const chain = getChain(token)
     return chain && chain.ACCOUNT_ZERO ? chain.ACCOUNT_ZERO : ""
   }
-  public static getAccountOne(token = 'swt') {
+  public static getAccountOne(token = "swt") {
     const chain = getChain(token)
     return chain && chain.ACCOUNT_ONE ? chain.ACCOUNT_ONE : ""
   }
-  public static getIssuer(token = 'swt') {
+  public static getIssuer(token = "swt") {
     const chain = getChain(token)
     return chain && chain.issuer ? chain.issuer : ""
   }
@@ -82,11 +82,12 @@ class Wallet {
     issuer = Wallet.getIssuer()
   ) {
     const CURRENCIES = Wallet.getCurrencies()
+    const original = currency
     currency = currency.toUpperCase()
     currency = CURRENCIES.hasOwnProperty(currency)
       ? CURRENCIES[currency]
       : currency
-    return currency === Wallet.getCurrency()
+    return currency === Wallet.getCurrency(original)
       ? { currency, issuer: "" }
       : { currency, issuer }
   }
