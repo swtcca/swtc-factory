@@ -50,7 +50,7 @@ class Wallet {
 
   public static getCurrency(token = "swt") {
     const chain = getChain(token)
-    return chain ? chain.currency : token.toUpperCase()
+    return chain ? chain.currency : ""
   }
   public static getCurrencies(token = "swt") {
     const chain = getChain(token)
@@ -58,7 +58,7 @@ class Wallet {
   }
   public static getChain(token = "swt") {
     const chain = getChain(token)
-    return chain ? chain.code : token.toLowerCase()
+    return chain ? chain.code : ""
   }
   public static getFee(token = "swt") {
     const chain = getChain(token)
@@ -78,27 +78,28 @@ class Wallet {
   }
 
   public static makeCurrency(
-    currency = Wallet.getCurrency(),
-    issuer = Wallet.getIssuer()
+    currency = "swt",
+    issuer = Wallet.getIssuer(),
+    token = "swt"
   ) {
-    const CURRENCIES = Wallet.getCurrencies()
-    const original = currency
+    const CURRENCIES = Wallet.getCurrencies(token)
     currency = currency.toUpperCase()
     currency = CURRENCIES.hasOwnProperty(currency)
       ? CURRENCIES[currency]
       : currency
-    return currency === Wallet.getCurrency(original)
+    return currency === Wallet.getCurrency(token)
       ? { currency, issuer: "" }
       : { currency, issuer }
   }
   public static makeAmount(
     value = 1,
-    currency = Wallet.getCurrency(),
-    issuer = Wallet.getIssuer()
+    currency: any = "swt",
+    issuer = Wallet.getIssuer(),
+    token: "swt"
   ) {
     return typeof currency === "object"
       ? Object.assign({}, currency, { value: Number(value) })
-      : Object.assign({}, this.makeCurrency(currency, issuer), {
+      : Object.assign({}, this.makeCurrency(currency, issuer, token), {
           value: Number(value)
         })
   }

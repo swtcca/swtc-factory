@@ -1,6 +1,6 @@
 {
   "name": "swtc-factory",
-  "version": "1.2.3",
+  "version": "1.2.5",
   "description": "swtc base lib factory",
   "main": "src/index.js",
   "directories": {
